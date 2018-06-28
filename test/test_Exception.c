@@ -1,5 +1,8 @@
 #include "unity.h"
 #include "Exception.h"
+#include "CExceptionConfig.h"
+#include "CException.h"
+#include <stdio.h>
 
 void setUp(void)
 {
@@ -9,7 +12,44 @@ void tearDown(void)
 {
 }
 
-void test_Exception_NeedToImplement(void)
+char *names[]={
+  "Ali",
+  "David",
+  "Zhe Hao",
+  "Jane"
+};
+
+char *getName(int index){
+  if(index >= 4)
+    Throw("Error : Out of Bound of the array.");
+    return names[index];
+}
+
+void test_Exception_Given_1_Expect_error_code(void)
 {
-    TEST_IGNORE_MESSAGE("Need to Implement Exception");
+    CEXCEPTION_T  e;
+    char *name;
+
+    Try{
+      name = getName(5);
+      //printf("Name is : %s",name);
+      TEST_ASSERT_EQUAL_STRING("David",name);
+    }Catch(e){
+      printf("Error code : %d",e);
+      TEST_FAIL_MESSAGE(e);
+    }
+}
+
+void test_Exception_Given_1_Expect_Print_error_message(void)
+{
+    CEXCEPTION_T  e;
+    char *name;
+
+    Try{
+      name = getName(0);
+      printf("Name is : ");
+      //TEST_FAIL_MESSAGE("Exceptied ERR_OUT_OF_BOUND to be thrown ,but none");
+    }Catch(e){
+      //printf("Error code : %d",e);
+    }
 }
