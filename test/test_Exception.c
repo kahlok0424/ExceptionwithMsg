@@ -19,11 +19,24 @@ char *names[]={
   "Jane"
 };
 
+/*void throwError(char *msg,int errorCode){
+  Exception *ex = (excepion malloc());
+  ex->errorCode = errorCode;
+  ex->errorMs = msg;
+  Throw(ex);
+}*/
+
 char *getName(int index){
   if(index >= 4)
     Throw("Error : Out of Bound of the array.");
     return names[index];
 }
+
+/*char *getName2(int index){
+  if(index >= 4)
+    throwError("Error : Out of Bound of the array.");
+    return names[index];
+}*/
 
 void test_Exception_Given_1_Expect_error_code(void)
 {
